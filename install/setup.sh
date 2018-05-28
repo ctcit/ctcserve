@@ -41,7 +41,8 @@ echo ""
 echo "# Setting up DB subsystem"
 cd ${WWW}
 git clone https://github.com/ctcit/ctcdb.git db
-cp ${INSTALL}/configs/db.php  ${WWW}/db/application/config/database.php
+cp ${INSTALL}/configs/database/database.php  ${WWW}/db/application/config/
+cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 
 # Set up trip reports subsystem
 echo ""
