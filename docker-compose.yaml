@@ -9,7 +9,10 @@ services:
       - "443:443"
     volumes:
       - ./www:/var/www/html
+      # PENDING: May be better to add these using COPY in the dockerfile
+      # https://github.com/docker-library/docs/tree/master/php
       - ./conf/timezone.ini:/usr/local/etc/php/conf.d/timezone.ini
+      - ./conf/php.ini:/usr/local/etc/php/php.ini
     links:
       - db
 
