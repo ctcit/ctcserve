@@ -35,6 +35,8 @@ git clone https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
 cp -r ctcjoomlachanges/* ${WWW}
 cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
 rm -rf ctcjoomlachanges
+mkdir -p ${WWW}/ctcdocuments
+mkdir -p ${WWW}/newsletters
 
 # Set up db subsystem
 echo ""
