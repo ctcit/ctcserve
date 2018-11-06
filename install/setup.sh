@@ -1,10 +1,13 @@
 WD=${PWD}
 INSTALL=${PWD}/install
+DUMPS=${INSTALL}/clean_dumps
 DOCKERDIR=${WD}/docker
 WWW=${WD}/www
 DB=${WD}/db
+DBPREFIX=${DBPREFIX}
 
 mkdir -p ${WWW}
+mkdir -p ${WWW}/ctcdocuments
 mkdir -p ${DB}
 
 # Build the docker images
@@ -34,9 +37,7 @@ cd ${WD}
 git clone https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
 cp -r ctcjoomlachanges/* ${WWW}
 cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
-rm -rf ctcjoomlachanges
-mkdir -p ${WWW}/ctcdocuments
-mkdir -p ${WWW}/newsletters
+ctcjoomlachanges
 
 # Set up db subsystem
 echo ""
@@ -63,22 +64,19 @@ cp ${INSTALL}/configs/newsletter.php  ${WWW}/newsletter/config.php
  # Set up trip signup subsystem
 echo ""
 echo "# Setting up Trip-Signup subsystem"
-cd ${WWW}
+cd ${WD}
 git clone https://github.com/ctcit/trips.git tripsignup
+cd tripsignup
+npm install --save-dev @4awpawz/buster
+node busterPOSIX.sh
+# PENDING
+cp stage ${WWW}/tripsignup
 
 # Create databases & load sample data
 echo ""
 echo "# Setting up database"
-MYSQL_HOST=127.0.0.1
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASS=docker
-mysql -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/create_dbs.sql
-mysql ctcweb9_tripreports --max_allowed_packet=100M -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_tripreports.sql
-mysql ctcweb9_trip -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_trip.sql
-mysql ctcweb9_newsletter -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_newsletter.sql
-mysql ctcweb9_ctc -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_ctc.sql
-mysql ctcweb9_joom35 -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_joom35.sql
+cd ${WD}
+source ${INSTALL}/reload_db.sh ${DUMPS} ${DBPREFIX}
 
 echo ""
 cd ${WD}
