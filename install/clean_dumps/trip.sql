@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ctcweb9_trip`
+-- Database: `trip`
 --
 
 -- --------------------------------------------------------
@@ -42,7 +42,7 @@ CREATE TABLE `changehistory` (
   `subject` text,
   `body` text,
   `emailAudit` text
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE `edit` (
   `read` datetime DEFAULT NULL COMMENT 'UTC',
   `current` datetime NOT NULL COMMENT 'UTC',
   `isDirty` bit(1) NOT NULL DEFAULT b'0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -72,15 +72,15 @@ CREATE TABLE `participants` (
   `isRemoved` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Removed',
   `memberid` int(11) DEFAULT NULL,
   `isLeader` tinyint(1) NOT NULL COMMENT 'Leader',
-  `name` varchar(50) DEFAULT NULL COMMENT 'Name -- if null use value from ctcweb9_ctc.members',
-  `email` varchar(255) DEFAULT NULL COMMENT 'Email -- if null use the primaryEmail value from from ctcweb9_ctc.members table',
-  `phone` varchar(20) DEFAULT NULL COMMENT 'Phone -- if null use the homePhone from from ctcweb9_ctc.memberships table',
+  `name` varchar(50) DEFAULT NULL COMMENT 'Name -- if null use value from ctc.members',
+  `email` varchar(255) DEFAULT NULL COMMENT 'Email -- if null use the primaryEmail value from from ctc.members table',
+  `phone` varchar(20) DEFAULT NULL COMMENT 'Phone -- if null use the homePhone from from ctc.memberships table',
   `isVehicleProvider` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Car?',
   `vehicleRego` varchar(10) DEFAULT NULL COMMENT 'Rego',
   `status` text COMMENT 'Status',
   `isEmailPending` tinyint(1) NOT NULL DEFAULT '0',
   `isPLBProvider` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Does this participant plan on bringing a PLB on the trip'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -91,19 +91,19 @@ CREATE TABLE `participants` (
 CREATE TABLE `trips` (
   `id` int(11) NOT NULL COMMENT 'READONLY',
   `eventid` int(11) DEFAULT NULL COMMENT 'READONLY',
-  `title` varchar(120) DEFAULT NULL COMMENT 'Title -- if null use the value from from ctcweb9_newsletter.event table',
+  `title` varchar(120) DEFAULT NULL COMMENT 'Title -- if null use the value from from newsletter.event table',
   `date` date NOT NULL COMMENT 'Date',
   `originalDate` date NOT NULL,
   `length` varchar(50) DEFAULT NULL COMMENT 'Length',
-  `departurePoint` varchar(255) DEFAULT NULL COMMENT 'Departure Point -- if null use the value from from ctcweb9_newsletter.event table',
-  `grade` varchar(50) DEFAULT NULL COMMENT 'Grade -- if null use the value from from ctcweb9_newsletter.event table',
-  `cost` varchar(50) DEFAULT NULL COMMENT 'Cost -- if null use the value from from ctcweb9_newsletter.event table',
+  `departurePoint` varchar(255) DEFAULT NULL COMMENT 'Departure Point -- if null use the value from from newsletter.event table',
+  `grade` varchar(50) DEFAULT NULL COMMENT 'Grade -- if null use the value from from newsletter.event table',
+  `cost` varchar(50) DEFAULT NULL COMMENT 'Cost -- if null use the value from from newsletter.event table',
   `closeDate` date NOT NULL COMMENT 'Close Date',
   `status` text COMMENT 'Notes -- status text, normally updated by the leader to communicate to participants',
   `mapHtml` text COMMENT 'Map HTML',
   `isAdHoc` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'READONLY',
   `isRemoved` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Deleted flag'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
