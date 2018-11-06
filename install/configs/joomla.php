@@ -15,7 +15,7 @@ class JConfig {
 	public $host = 'db';
 	public $user = 'root';
 	public $password = 'docker';
-	public $db = 'ctcweb9_joom35';
+	public $db = 'joom35';
 	public $dbprefix = 'jos1_';
 	public $live_site = 'http://localhost';
 	public $mailchimp_apikey = 'f6c8d2a30a80170dec338f5cda7ef263-us8';
