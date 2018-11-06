@@ -1,4 +1,4 @@
-DUMPDIR=$0
+DUMPDIR=$1
 databases=( ctc joom35 newsletter trip tripreports )
 for db in "${databases[@]}"
 do

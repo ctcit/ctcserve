@@ -4,7 +4,7 @@ DUMPS=${INSTALL}/clean_dumps
 DOCKERDIR=${WD}/docker
 WWW=${WD}/www
 DB=${WD}/db
-DBPREFIX=${DBPREFIX}
+DBPREFIX=
 
 mkdir -p ${WWW}
 mkdir -p ${WWW}/ctcdocuments
@@ -34,7 +34,7 @@ rm -rf ${JOOMLA_INSTALL_ZIP}
 echo ""
 echo "# Applying CTC Joomla changes"
 cd ${WD}
-git clone https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
+git clone -b newServer https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
 cp -r ctcjoomlachanges/* ${WWW}
 cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
 ctcjoomlachanges
@@ -43,7 +43,7 @@ ctcjoomlachanges
 echo ""
 echo "# Setting up DB subsystem"
 cd ${WWW}
-git clone https://github.com/ctcit/ctcdb.git db
+git clone -b newServer https://github.com/ctcit/ctcdb.git db
 cp ${INSTALL}/configs/database/database.php  ${WWW}/db/application/config/
 cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 
@@ -51,21 +51,21 @@ cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 echo ""
 echo "# Setting up Trip-Reports subsystem"
 cd ${WWW}
-git clone https://github.com/ctcit/tripreports.git tripreports
+git clone -b newServer https://github.com/ctcit/tripreports.git tripreports
 cp ${INSTALL}/configs/tripreport.site.js  ${WWW}/tripreports/app/config/site.js
 
 # Set up newsletter subsystem
 echo ""
 echo "# Setting up Newsletter subsystem"
 cd ${WWW}
-git clone https://github.com/ctcit/newsletter.git newsletter
+git clone -b newServer https://github.com/ctcit/newsletter.git newsletter
 cp ${INSTALL}/configs/newsletter.php  ${WWW}/newsletter/config.php
 
  # Set up trip signup subsystem
 echo ""
 echo "# Setting up Trip-Signup subsystem"
 cd ${WD}
-git clone https://github.com/ctcit/trips.git tripsignup
+git clone -b newServer https://github.com/ctcit/trips.git tripsignup
 cd tripsignup
 npm install --save-dev @4awpawz/buster
 node busterPOSIX.sh
@@ -76,7 +76,7 @@ cp stage ${WWW}/tripsignup
 echo ""
 echo "# Setting up database"
 cd ${WD}
-source ${INSTALL}/reload_db.sh ${DUMPS} ${DBPREFIX}
+source ${INSTALL}/reload_db.sh ${DUMPS}
 
 echo ""
 cd ${WD}
