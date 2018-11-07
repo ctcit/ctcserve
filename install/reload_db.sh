@@ -11,7 +11,7 @@ mysql -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INS
 echo ${INSTALL}/create_dbs.sql
 mysql -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/create_dbs.sql
 echo ${DUMPS}/${DBPREFIX}tripreports.sql
-#mysql ${DBPREFIX}tripreports --max_allowed_packet=100M -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${DUMPS}/${DBPREFIX}tripreports.sql
+mysql ${DBPREFIX}tripreports --max_allowed_packet=100M -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${DUMPS}/${DBPREFIX}tripreports.sql
 echo ${DUMPS}/${DBPREFIX}trip.sql
 mysql ${DBPREFIX}trip -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${DUMPS}/${DBPREFIX}trip.sql
 echo ${DUMPS}/${DBPREFIX}newsletter.sql

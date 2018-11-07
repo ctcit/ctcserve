@@ -37,7 +37,6 @@ cd ${WD}
 git clone -b newServer https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
 cp -r ctcjoomlachanges/* ${WWW}
 cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
-ctcjoomlachanges
 
 # Set up db subsystem
 echo ""
@@ -51,7 +50,7 @@ cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 echo ""
 echo "# Setting up Trip-Reports subsystem"
 cd ${WWW}
-git clone -b newServer https://github.com/ctcit/tripreports.git tripreports
+git clone https://github.com/ctcit/tripreports.git tripreports
 cp ${INSTALL}/configs/tripreport.site.js  ${WWW}/tripreports/app/config/site.js
 
 # Set up newsletter subsystem
@@ -68,9 +67,8 @@ cd ${WD}
 git clone -b newServer https://github.com/ctcit/trips.git tripsignup
 cd tripsignup
 npm install --save-dev @4awpawz/buster
-node busterPOSIX.sh
-# PENDING
-cp stage ${WWW}/tripsignup
+node busterPOSIX.js
+cp -r stage ${WWW}/tripsignup
 
 # Create databases & load sample data
 echo ""
