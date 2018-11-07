@@ -66,6 +66,12 @@ echo "# Setting up Trip-Signup subsystem"
 cd ${WWW}
 git clone https://github.com/ctcit/trips.git tripsignup
 
+ # Set up mailchimp sync subsystem
+echo ""
+echo "# Setting up mailchimp sync subsystem"
+cd ${WWW}
+git clone https://github.com/ctcit/mailchimp.git mailchimp
+
 # Create databases & load sample data
 echo ""
 echo "# Setting up database"
