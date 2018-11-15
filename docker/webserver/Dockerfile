@@ -1,7 +1,13 @@
 FROM php:5.6-apache
 
+ENV LETSENCRYPT_HOME /etc/letsencrypt
+ENV DOMAINS ctc.05081986.xyz
+ENV WEBMASTER_MAIL nickedwrds@gmail.com
+ENV STAGING 1
+
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sources.list && \
+    #add-apt-repository ppa:certbot/certbot && \
     apt-get update -yq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq \
          libsasl2-modules \
@@ -16,6 +22,9 @@ COPY ./conf/postfix/main.cf /etc/postfix/main.cf
 COPY ./conf/postfix/master.cf /etc/postfix/master.cf
 COPY ./conf/postfix/sasl_passwd /etc/postfix/sasl_passwd
 COPY run_services.sh /opt/ctcserve/run_services.sh
+COPY init_letsencrypt.sh /opt/ctcserve/
+
+RUN chmod +x /opt/ctcserve/*.sh
 
 RUN postmap hash:/etc/postfix/sasl_passwd
 

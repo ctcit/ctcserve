@@ -9,7 +9,6 @@ services:
       - "443:443"
     volumes:
       - ./www:/var/www/html
-      - ./letsencrypt_certificates:/etc/letsencrypt
     links:
       - db
 
