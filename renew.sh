@@ -1,0 +1,1 @@
+docker run --rm -it --name certbot -v /home/ctcserve/ctcserve/letsencrypt/etc:/etc/letsencrypt -v /home/ctcserve/ctcserve/letsencrypt/lib:/var/lib/letsencrypt -v /home/ctcserve/bootstrap_letsencrypt/www:/var/www -v /home/ctcserve/ctcserve/letsencrypt/log:/var/log/letsencrypt certbot/certbot renew
