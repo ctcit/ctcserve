@@ -11,7 +11,7 @@ RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sou
 
 COPY ./conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 COPY ./conf/php.ini /usr/local/etc/php/php.ini
-#COPY ./conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY ./conf/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 COPY ./conf/postfix/main.cf /etc/postfix/main.cf
 COPY ./conf/postfix/master.cf /etc/postfix/master.cf
 COPY ./conf/postfix/sasl_passwd /etc/postfix/sasl_passwd
