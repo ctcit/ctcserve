@@ -79,7 +79,8 @@ CREATE TABLE `participants` (
   `vehicleRego` varchar(10) DEFAULT NULL COMMENT 'Rego',
   `status` text COMMENT 'Status',
   `isEmailPending` tinyint(1) NOT NULL DEFAULT '0',
-  `isPLBProvider` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Does this participant plan on bringing a PLB on the trip'
+  `isPLBProvider` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Does this participant plan on bringing a PLB on the trip',
+  `displayPriority` double DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -102,6 +103,7 @@ CREATE TABLE `trips` (
   `status` text COMMENT 'Notes -- status text, normally updated by the leader to communicate to participants',
   `mapHtml` text COMMENT 'Map HTML',
   `isAdHoc` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'READONLY',
+  `maxParticipants` int(11) DEFAULT NULL COMMENT 'The maximum number of participants the leader would like',
   `isRemoved` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Deleted flag'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
