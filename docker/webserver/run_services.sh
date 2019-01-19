@@ -9,6 +9,10 @@ service rsyslog start
 # Start postfix
 service postfix start
 
+# Start cron daemon
+service cron start
+crontab /etc/crontab
+
 /opt/ctcserve/init_letsencrypt.sh
 
 #certbot install --apache --cert-name ctc.05081986.xyz --redirect
