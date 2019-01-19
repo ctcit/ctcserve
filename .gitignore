@@ -1,2 +1,4 @@
 www
 db
+letsencrypt_certificates
+*.swp
