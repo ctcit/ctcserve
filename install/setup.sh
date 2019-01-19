@@ -68,7 +68,7 @@ git clone -b newServer https://github.com/ctcit/trips.git tripsignup
 cd tripsignup
 npm install --save-dev @4awpawz/buster
 node busterPOSIX.js
-cp -r stage ${WWW}/tripsignup
+cp -r stage ${WWW}/trips
 
  # Set up mailchimp sync subsystem
 echo ""
