@@ -1,10 +1,13 @@
 WD=${PWD}
 INSTALL=${PWD}/install
+DUMPS=${INSTALL}/clean_dumps
 DOCKERDIR=${WD}/docker
 WWW=${WD}/www
 DB=${WD}/db
+DBPREFIX=
 
 mkdir -p ${WWW}
+mkdir -p ${WWW}/ctcdocuments
 mkdir -p ${DB}
 
 # Build the docker images
@@ -31,18 +34,15 @@ rm -rf ${JOOMLA_INSTALL_ZIP}
 echo ""
 echo "# Applying CTC Joomla changes"
 cd ${WD}
-git clone https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
+git clone -b newServer https://github.com/ctcit/ctcjoomlachanges.git ctcjoomlachanges
 cp -r ctcjoomlachanges/* ${WWW}
 cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
-rm -rf ctcjoomlachanges
-mkdir -p ${WWW}/ctcdocuments
-mkdir -p ${WWW}/newsletters
 
 # Set up db subsystem
 echo ""
 echo "# Setting up DB subsystem"
 cd ${WWW}
-git clone https://github.com/ctcit/ctcdb.git db
+git clone -b newServer https://github.com/ctcit/ctcdb.git db
 cp ${INSTALL}/configs/database/database.php  ${WWW}/db/application/config/
 cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 
@@ -57,14 +57,18 @@ cp ${INSTALL}/configs/tripreport.site.js  ${WWW}/tripreports/app/config/site.js
 echo ""
 echo "# Setting up Newsletter subsystem"
 cd ${WWW}
-git clone https://github.com/ctcit/newsletter.git newsletter
+git clone -b newServer https://github.com/ctcit/newsletter.git newsletter
 cp ${INSTALL}/configs/newsletter.php  ${WWW}/newsletter/config.php
 
  # Set up trip signup subsystem
 echo ""
 echo "# Setting up Trip-Signup subsystem"
-cd ${WWW}
-git clone https://github.com/ctcit/trips.git tripsignup
+cd ${WD}
+git clone -b newServer https://github.com/ctcit/trips.git tripsignup
+cd tripsignup
+npm install --save-dev @4awpawz/buster
+node busterPOSIX.js
+cp -r stage ${WWW}/tripsignup
 
  # Set up mailchimp sync subsystem
 echo ""
@@ -75,16 +79,8 @@ git clone https://github.com/ctcit/mailchimp.git mailchimp
 # Create databases & load sample data
 echo ""
 echo "# Setting up database"
-MYSQL_HOST=127.0.0.1
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASS=docker
-mysql -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/create_dbs.sql
-mysql ctcweb9_tripreports --max_allowed_packet=100M -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_tripreports.sql
-mysql ctcweb9_trip -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_trip.sql
-mysql ctcweb9_newsletter -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_newsletter.sql
-mysql ctcweb9_ctc -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_ctc.sql
-mysql ctcweb9_joom35 -u ${MYSQL_USER} -P ${MYSQL_PORT} -h ${MYSQL_HOST} -p${MYSQL_PASS} < ${INSTALL}/clean_dumps/ctcweb9_joom35.sql
+cd ${WD}
+source ${INSTALL}/reload_db.sh ${DUMPS}
 
 echo ""
 cd ${WD}
