@@ -8,6 +8,7 @@ DBPREFIX=
 
 mkdir -p ${WWW}
 mkdir -p ${WWW}/ctcdocuments
+mkdir -p ${WWW}/.well_known
 mkdir -p ${DB}
 
 # Build the docker images
