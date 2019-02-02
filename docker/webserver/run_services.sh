@@ -10,8 +10,8 @@ service rsyslog start
 service postfix start
 
 # Start cron daemon
-service cron start
 crontab /etc/crontab
+service cron start
 
 /opt/ctcserve/init_letsencrypt.sh
 
