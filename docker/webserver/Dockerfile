@@ -1,11 +1,10 @@
 FROM php:5.6-apache
 
 ENV LETSENCRYPT_HOME /etc/letsencrypt
-ENV DOMAINS ctc.05081986.xyz
+ENV DOMAINS ctc.org.nz
 ENV WEBMASTER_MAIL nickedwrds@gmail.com
 ENV STAGING 0
 
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sources.list && \
     #add-apt-repository ppa:certbot/certbot && \
     apt-get update -yq && \
@@ -14,6 +13,11 @@ RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sou
          zlib1g-dev postfix rsyslog \
          && docker-php-ext-install zip && \
     apt-get install -yq python-certbot-apache -t stretch-backports
+
+RUN apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+docker-php-ext-install mysqli gd && \
+docker-php-ext-enable mysqli gd
 
 COPY ./conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 COPY ./conf/php.ini /usr/local/etc/php/php.ini
@@ -28,7 +32,5 @@ COPY init_letsencrypt.sh /opt/ctcserve/
 RUN chmod +x /opt/ctcserve/*.sh
 
 RUN postmap hash:/etc/postfix/sasl_passwd
-
-#RUN certbot --apache  --test-cert -n --domains ctc.05081986.xyz --agree-tos --email nickedwrds@gmail.com
 
 CMD /opt/ctcserve/run_services.sh
