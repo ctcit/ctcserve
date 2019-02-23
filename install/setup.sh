@@ -43,7 +43,7 @@ cp -r ${INSTALL}/configs/joomla.php  ${WWW}/configuration.php
 echo ""
 echo "# Setting up DB subsystem"
 cd ${WWW}
-git clone -b newServer https://github.com/ctcit/ctcdb.git db
+git clone https://github.com/ctcit/ctcdb.git db
 cp ${INSTALL}/configs/database/database.php  ${WWW}/db/application/config/
 cp ${INSTALL}/configs/database/config.php  ${WWW}/db/application/config/
 
@@ -68,7 +68,7 @@ cd ${WD}
 git clone -b newServer https://github.com/ctcit/trips.git tripsignup
 cd tripsignup
 npm install --save-dev @4awpawz/buster
-node busterPOSIX.js
+node busterWindows.js
 cp -r stage ${WWW}/trips
 
  # Set up mailchimp sync subsystem

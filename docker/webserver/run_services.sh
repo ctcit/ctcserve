@@ -13,7 +13,7 @@ service postfix start
 crontab /etc/crontab
 service cron start
 
-/opt/ctcserve/init_letsencrypt.sh
+# /opt/ctcserve/init_letsencrypt.sh
 
 #certbot install --apache --cert-name ctc.05081986.xyz --redirect
 

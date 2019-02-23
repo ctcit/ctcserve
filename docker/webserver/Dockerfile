@@ -33,4 +33,5 @@ RUN chmod +x /opt/ctcserve/*.sh
 
 RUN postmap hash:/etc/postfix/sasl_passwd
 
-CMD /opt/ctcserve/run_services.sh
+CMD [ "/bin/bash", "/opt/ctcserve/run_services.sh" ]
+
