@@ -28,7 +28,7 @@ echo "# Downloading and installing Joomla"
 JOOMLA_INSTALL_URL=https://downloads.joomla.org/cms/joomla3/3-8-7/
 JOOMLA_INSTALL_ZIP=Joomla_3.8.7-Stable-Full_Package.zip
 cd ${WWW}
-wget ${JOOMLA_INSTALL_URL}${JOOMLA_INSTALL_ZIP}
+wget --no-check-certificate } -O ${JOOMLA_INSTALL_ZIP} ${JOOMLA_INSTALL_URL}${JOOMLA_INSTALL_ZIP}
 unzip ${JOOMLA_INSTALL_ZIP}
 rm -rf ${JOOMLA_INSTALL_ZIP}
 
