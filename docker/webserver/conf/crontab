@@ -1,3 +1,5 @@
 # Renew certificate
 # Chose an unusual time to avoid flooding the letsencrypt server :)
 36 14 * * * date > /var/www/html/.well_known/status && certbot renew >> /var/www/html/.well_known/status 
+0 *   * * * /usr/local/bin/php /var/www/html/mailchimp/reconcilemailchimplists.php >> /var/www/html/mailchimp/reconcilemailchimplists.log 2>&1
+
