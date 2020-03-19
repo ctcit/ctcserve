@@ -11,6 +11,7 @@ services:
       - ./www:/var/www/html
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
+      - /home/postcat:/var/mail
     links:
       - db
 
