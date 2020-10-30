@@ -54,3 +54,7 @@ Check container statuses:
 ```
 docker-compose ps
 ```
+
+`Docker Desktop` on Windows gives you a handy GUI where you can see the container logs which is useful for trouble-shooting.
+
+![Docker Desktop on Windows](doc/DockerWindows.png "Docker Desktop on Windows")
