@@ -26,6 +26,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=docker
       - MYSQL_DATABASE=ctc
+      - TZ=Pacific/Auckland
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
