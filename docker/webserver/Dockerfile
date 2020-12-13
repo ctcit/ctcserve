@@ -29,6 +29,7 @@ COPY ./conf/postfix/sasl_passwd /etc/postfix/sasl_passwd
 COPY ./conf/crontab /etc/crontab
 COPY run_services.sh /opt/ctcserve/run_services.sh
 COPY init_letsencrypt.sh /opt/ctcserve/
+COPY triphub_post_emails.php /opt/ctcserve/
 
 RUN chmod +x /opt/ctcserve/*.sh
 
