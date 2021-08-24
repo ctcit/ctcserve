@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.4-apache
 
 ENV LETSENCRYPT_HOME /etc/letsencrypt
 ENV DOMAINS ctc.org.nz,www.ctc.org.nz
@@ -6,18 +6,19 @@ ENV WEBMASTER_MAIL nickedwrds@gmail.com
 ENV STAGING 0
 
 RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sources.list && \
-    #add-apt-repository ppa:certbot/certbot && \
     apt-get update -yq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq \
          libsasl2-modules \
-         zlib1g-dev postfix rsyslog \
-         && docker-php-ext-install zip && \
-    apt-get install -yq python-certbot-apache -t stretch-backports
-
-RUN apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-docker-php-ext-install mysqli gd && \
-docker-php-ext-enable mysqli gd
+         libzip-dev \
+         zip \
+         postfix rsyslog \
+         libpng-dev \
+         libjpeg-dev \
+         libicu-dev \
+	 libfreetype6-dev && \
+    apt-get install -yq python-certbot-apache -t stretch-backports && \
+    docker-php-ext-configure gd --with-jpeg&& \
+    docker-php-ext-install zip mysqli gd intl
 
 COPY ./conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
 COPY ./conf/php.ini /usr/local/etc/php/php.ini
