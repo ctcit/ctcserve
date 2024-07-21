@@ -1,11 +1,11 @@
-FROM php:7.4-apache
+FROM php:8.3-apache
 
 ENV LETSENCRYPT_HOME /etc/letsencrypt
 ENV DOMAINS ctc.org.nz,www.ctc.org.nz
 ENV WEBMASTER_MAIL nickedwrds@gmail.com
 ENV STAGING 0
 
-RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sources.list && \
+RUN echo deb http://ftp.debian.org/debian bullseye-backports main >> /etc/apt/sources.list && \
     apt-get update -yq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq \
          libsasl2-modules \
@@ -16,7 +16,7 @@ RUN echo deb http://ftp.debian.org/debian stretch-backports main >> /etc/apt/sou
          libjpeg-dev \
          libicu-dev \
 	 libfreetype6-dev && \
-    apt-get install -yq python-certbot-apache -t stretch-backports && \
+    apt-get install -yq python3-certbot-apache -t bullseye-backports && \
     docker-php-ext-configure gd --with-jpeg&& \
     docker-php-ext-install zip mysqli gd intl
 
@@ -36,5 +36,6 @@ RUN chmod +x /opt/ctcserve/*.sh
 
 RUN postmap hash:/etc/postfix/sasl_passwd
 RUN groupadd -g 5000 postcat && usermod -a -G postcat www-data
+RUN a2enmod rewrite
 
 CMD /opt/ctcserve/run_services.sh
