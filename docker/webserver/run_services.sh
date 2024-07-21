@@ -9,13 +9,14 @@ service rsyslog start
 # Start postfix
 service postfix start
 
+
 # Start cron daemon
 crontab /etc/crontab
 service cron start
 
 /opt/ctcserve/init_letsencrypt.sh
 
-#certbot install --apache --cert-name ctc.org.nz --redirect
+service apache2 stop
 
 set -e
 # Yanked from https://github.com/docker-library/php/blob/79436c81bdc8ebea0f6369a0b7f368127acc871e/5.6/jessie/apache/apache2-foreground
