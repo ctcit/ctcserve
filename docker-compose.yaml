@@ -2,6 +2,7 @@ services:
   webserver:
     build: ./docker/webserver
     image: ctcserve
+    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -18,6 +19,7 @@ services:
     image: mysql:5.7
     #https://github.com/docker-library/mysql/issues/149
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"  --max_allowed_packet=100M
+    restart: always
     ports:
       - "3306:3306"
     volumes:
@@ -39,17 +41,3 @@ services:
      - /sessions
     links:
      - db
-
-       #webserver-dev:
-       #  build: ./docker/webserver-dev
-       #  image: ctcserve-dev
-       #  ports:
-       #    - "3000:443"
-       #    - "3080:80"
-       #  volumes:
-       #    - ./www_dev:/var/www/html
-       #    - ./ctcdb:/opt/ctcdb
-       #    - ./letsencrypt_dev/etc:/etc/letsencrypt
-       #    - ./letsencrypt_dev/log:/var/log/letsencrypt
-       #  links:
-       #    - db
