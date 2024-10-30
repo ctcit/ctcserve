@@ -36,6 +36,9 @@ RUN chmod +x /opt/ctcserve/*.sh
 
 RUN postmap hash:/etc/postfix/sasl_passwd
 RUN groupadd -g 5000 postcat && usermod -a -G postcat www-data
-RUN a2enmod rewrite
+
+# Add Apache modules
+RUN a2enmod rewrite && a2enmod ssl
 
 CMD /opt/ctcserve/run_services.sh
+
