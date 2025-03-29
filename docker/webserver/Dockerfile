@@ -15,9 +15,9 @@ RUN echo deb http://ftp.debian.org/debian bullseye-backports main >> /etc/apt/so
          libpng-dev \
          libjpeg-dev \
          libicu-dev \
-	 libfreetype6-dev && \
+	     libfreetype6-dev && \
     apt-get install -yq python3-certbot-apache -t bullseye-backports && \
-    docker-php-ext-configure gd --with-jpeg&& \
+    docker-php-ext-configure gd --with-jpeg --with-freetype && \
     docker-php-ext-install zip mysqli gd intl
 
 COPY ./conf/timezone.ini /usr/local/etc/php/conf.d/timezone.ini
