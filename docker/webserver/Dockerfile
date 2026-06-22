@@ -5,18 +5,19 @@ ENV DOMAINS ctc.org.nz,www.ctc.org.nz
 ENV WEBMASTER_MAIL nickedwrds@gmail.com
 ENV STAGING 0
 
-RUN echo deb http://ftp.debian.org/debian bullseye-backports main >> /etc/apt/sources.list && \
-    apt-get update -yq && \
+RUN apt-get update -yq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -yq \
          libsasl2-modules \
          libzip-dev \
          zip \
+	 zlib1g-dev \
          postfix rsyslog \
+         pkg-config \
          libpng-dev \
          libjpeg-dev \
          libicu-dev \
-	     libfreetype6-dev && \
-    apt-get install -yq python3-certbot-apache -t bullseye-backports && \
+	 libfreetype6-dev \
+         python3-certbot-apache && \
     docker-php-ext-configure gd --with-jpeg --with-freetype && \
     docker-php-ext-install zip mysqli gd intl
 

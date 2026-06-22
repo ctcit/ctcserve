@@ -16,9 +16,9 @@ services:
       - db
 
   db:
-    image: mysql:5.7
+    image: mysql:8.4
     #https://github.com/docker-library/mysql/issues/149
-    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"  --max_allowed_packet=100M
+    command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION"  --max_allowed_packet=100M --tls_version=TLSv1.2
     restart: always
     ports:
       - "3306:3306"
@@ -30,7 +30,7 @@ services:
       - TZ=Pacific/Auckland
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.2
     container_name: phpmyadmin
     environment:
      - PMA_ARBITRARY=1
