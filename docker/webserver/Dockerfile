@@ -12,6 +12,7 @@ RUN set -eux; \
       libzip-dev \
       zip \
       zlib1g-dev \
+      openssl \
       postfix rsyslog \
       pkg-config \
       libpng-dev \
@@ -20,7 +21,7 @@ RUN set -eux; \
       libfreetype6-dev \
       python3-certbot-apache; \
     docker-php-ext-configure gd --with-jpeg --with-freetype; \
-    docker-php-ext-install zip mysqli gd intl; \
+    docker-php-ext-install -j"$(nproc)" zip mysqli gd intl; \
     a2enmod rewrite ssl; \
     groupadd -g 5000 postcat; \
     usermod -a -G postcat www-data; \
@@ -38,7 +39,9 @@ COPY --chmod=755 run_services.sh /opt/ctcserve/run_services.sh
 COPY init_letsencrypt.sh /opt/ctcserve/
 COPY triphub_post_emails.php /opt/ctcserve/
 
-RUN set -eux; postmap hash:/etc/postfix/sasl_passwd
+RUN set -eux; \
+  sed -i 's/\r$//' /opt/ctcserve/run_services.sh /opt/ctcserve/init_letsencrypt.sh; \
+  postmap hash:/etc/postfix/sasl_passwd
 
-CMD ["/opt/ctcserve/run_services.sh"]
+CMD ["bash", "/opt/ctcserve/run_services.sh"]
 
