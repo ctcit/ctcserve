@@ -68,6 +68,3 @@ services:
      - /sessions
     links:
      - db
-
-volumes:
-  ctcserve-db:
