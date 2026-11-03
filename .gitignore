@@ -3,7 +3,6 @@ db
 letsencrypt_certificates
 letsencrypt
 *.swp
-ctcjoomlachanges
 tripsignup
 old
 db-backup-*
