@@ -1,3 +1,7 @@
 [submodule "ctcjoomlachanges"]
 	path = ctcjoomlachanges
 	url = https://github.com/ctcit/ctcjoomlachanges.git
+
+[submodule "ctcdb"]
+	path = ctcdb
+	url = https://github.com/ctcit/ctcdb.git
