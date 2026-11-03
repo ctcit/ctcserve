@@ -8,6 +8,31 @@ services:
       - "443:443"
     volumes:
       - ./www:/var/www/html
+      # Custom modules from ctcjoomlachanges
+      - ./ctcjoomlachanges/modules/mod_ctc_tripcalendar:/var/www/html/modules/mod_ctc_tripcalendar
+      - ./ctcjoomlachanges/modules/mod_ctc_user_menu:/var/www/html/modules/mod_ctc_user_menu
+      - ./ctcjoomlachanges/modules/mod_ctc_welcome:/var/www/html/modules/mod_ctc_welcome
+      - ./ctcjoomlachanges/modules/mod_frontpagetripreports:/var/www/html/modules/mod_frontpagetripreports
+      # Custom template
+      - ./ctcjoomlachanges/templates/ctctemplate:/var/www/html/templates/ctctemplate
+      # Custom plugins
+      - ./ctcjoomlachanges/plugins/authentication/ctc:/var/www/html/plugins/authentication/ctc
+      - ./ctcjoomlachanges/plugins/content/ctcdocs:/var/www/html/plugins/content/ctcdocs
+      - ./ctcjoomlachanges/plugins/content/ctcprospectivemember:/var/www/html/plugins/content/ctcprospectivemember
+      # Custom includes and library override
+      - ./ctcjoomlachanges/ctcincludes:/var/www/html/ctcincludes
+      - ./ctcjoomlachanges/libraries/src/Table/User.php:/var/www/html/libraries/src/Table/User.php
+      # Custom top-level scripts
+      - ./ctcjoomlachanges/dbcaptionedimage.php:/var/www/html/dbcaptionedimage.php
+      - ./ctcjoomlachanges/dbcroppedimage.php:/var/www/html/dbcroppedimage.php
+      - ./ctcjoomlachanges/dbgpx.php:/var/www/html/dbgpx.php
+      - ./ctcjoomlachanges/dbimage.php:/var/www/html/dbimage.php
+      - ./ctcjoomlachanges/dbthumb.php:/var/www/html/dbthumb.php
+      - ./ctcjoomlachanges/getUserID.php:/var/www/html/getUserID.php
+      # Custom image assets
+      - ./ctcjoomlachanges/images/GapImageScaledUp.png:/var/www/html/images/GapImageScaledUp.png
+      - ./ctcjoomlachanges/images/facebook-link-icon.png:/var/www/html/images/facebook-link-icon.png
+      - ./ctcjoomlachanges/images/header_bg.jpg:/var/www/html/images/header_bg.jpg
       - ./ctcdb:/opt/ctcdb
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt

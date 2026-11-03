@@ -40,12 +40,7 @@ If everything is OK all three containers should have Status "Up". In this case y
 
 ## Custom Joomla development (Option A)
 
-The `ctcjoomlachanges` repository is included as a git submodule under `ctcjoomlachanges/`. Custom modules, plugins, templates, and helper files are bind-mounted into Joomla using `docker-compose.custom-overlays.yaml`, so edits happen directly in git-tracked files with no copy/paste workflow.
-
-Start services with overlays enabled:
-```
-docker compose -f docker-compose.yaml -f docker-compose.custom-overlays.yaml up -d
-```
+The `ctcjoomlachanges` repository is included as a git submodule under `ctcjoomlachanges/`. Custom modules, plugins, templates, and helper files are bind-mounted directly from `docker-compose.yaml`, so edits happen directly in git-tracked files with no copy/paste workflow.
 
 After adding new extension files or manifests, refresh Joomla extension metadata:
 
