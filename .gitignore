@@ -3,5 +3,4 @@ db
 letsencrypt_certificates
 letsencrypt
 *.swp
-ctcjoomlachanges
 tripsignup

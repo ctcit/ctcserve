@@ -11,6 +11,12 @@ Clone the repo:
 ```
 git clone https://github.com/ctcit/ctcserve.git
 ```
+
+Clone custom Joomla code as a submodule:
+```
+git submodule update --init --recursive
+```
+
 Change to the `ctcserve` directory and build:
 ```
 cd ctcserve
@@ -31,6 +37,27 @@ Check that everything is running OK by executing:
 docker-compose ps
 ```
 If everything is OK all three containers should have Status "Up". In this case you should be able to access the website homepage at http://localhost and the PHP MyAdmin instance at http://localhost:8080
+
+## Custom Joomla development (Option A)
+
+The `ctcjoomlachanges` repository is included as a git submodule under `ctcjoomlachanges/`. Custom modules, plugins, templates, and helper files are bind-mounted into Joomla using `docker-compose.custom-overlays.yaml`, so edits happen directly in git-tracked files with no copy/paste workflow.
+
+Start services with overlays enabled:
+```
+docker compose -f docker-compose.yaml -f docker-compose.custom-overlays.yaml up -d
+```
+
+After adding new extension files or manifests, refresh Joomla extension metadata:
+
+On Windows PowerShell:
+```
+powershell -ExecutionPolicy Bypass -File .\install\sync-joomla-customizations.ps1
+```
+
+On macOS/Linux:
+```
+./install/sync-joomla-customizations.sh
+```
 
 ## Usage
 
