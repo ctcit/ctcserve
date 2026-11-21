@@ -36,6 +36,7 @@ services:
       - ./ctcjoomlachanges/images/facebook-link-icon.png:/var/www/html/images/facebook-link-icon.png
       - ./ctcjoomlachanges/images/header_bg.jpg:/var/www/html/images/header_bg.jpg
       - ./ctcdb:/opt/ctcdb
+      - ./ctcdb_alastair:/opt/ctcdb_alastair
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
       - /home/postcat:/var/mail
