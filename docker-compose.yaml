@@ -9,6 +9,7 @@ services:
     volumes:
       - ./www:/var/www/html
       - ./ctcdb:/opt/ctcdb
+      - ./ctcdb_alastair:/opt/ctcdb_alastair
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
       - /home/postcat:/var/mail

@@ -18,6 +18,7 @@ RUN set -eux; \
       libjpeg-dev \
       libicu-dev \
       libfreetype6-dev \
+      cron \
       python3-certbot-apache; \
     docker-php-ext-configure gd --with-jpeg --with-freetype; \
     docker-php-ext-install zip mysqli gd intl; \
