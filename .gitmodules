@@ -5,3 +5,9 @@
 [submodule "ctcdb"]
 	path = ctcdb
 	url = https://github.com/ctcit/ctcdb.git
+[submodule "tripreports"]
+	path = tripreports
+	url = https://github.com/ctcit/tripreports.git
+[submodule "mailchimp"]
+	path = mailchimp
+	url = https://github.com/ctcit/mailchimp.git

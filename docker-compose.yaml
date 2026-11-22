@@ -35,10 +35,17 @@ services:
       - ./ctcjoomlachanges/images/GapImageScaledUp.png:/var/www/html/images/GapImageScaledUp.png
       - ./ctcjoomlachanges/images/facebook-link-icon.png:/var/www/html/images/facebook-link-icon.png
       - ./ctcjoomlachanges/images/header_bg.jpg:/var/www/html/images/header_bg.jpg
+      # CTC DB
       - ./ctcdb:/opt/ctcdb
       - ./ctcdb_alastair:/opt/ctcdb_alastair
+      # Trip Reports
+      - ./tripreports:/opt/tripreports
+      # Mailchimp
+      - ./mailchimp:/opt/mailchimp
+      # Let's Encrypt (SSL)
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
+      # Mail storage for Postcat - incoming mailing list emails
       - /home/postcat:/var/mail
     links:
       - db
