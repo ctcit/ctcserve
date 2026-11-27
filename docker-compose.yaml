@@ -36,12 +36,12 @@ services:
       - ./ctcjoomlachanges/images/facebook-link-icon.png:/var/www/html/images/facebook-link-icon.png
       - ./ctcjoomlachanges/images/header_bg.jpg:/var/www/html/images/header_bg.jpg
       # CTC DB
-      - ./ctcdb:/opt/ctcdb
-      - ./ctcdb_alastair:/opt/ctcdb_alastair
+      - ./ctcdb:/var/www/html/ctcdb
+      - ./ctcdb_alastair:/var/www/html/ctcdb_alastair
       # Trip Reports
-      - ./tripreports:/opt/tripreports
+      - ./tripreports:/var/www/html/tripreports
       # Mailchimp
-      - ./mailchimp:/opt/mailchimp
+      - ./mailchimp:/var/www/html/mailchimp
       # Let's Encrypt (SSL)
       - ./letsencrypt/etc:/etc/letsencrypt
       - ./letsencrypt/log:/var/log/letsencrypt
